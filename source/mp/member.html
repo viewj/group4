@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* {
+    margin:0;
+    padding:0;
+}
+ul {
+    list-style-type:none;
+}
+#mem_title {
+    width:700px;
+    height:25px;
+    margin:10px 0 0 20px;
+    border-bottom:solid 2px #1b89d4;
+}
+#mem_form {
+    width:700px;
+    margin-left:20px;
+    font-family:"돋움";
+    font-size:12px;
+    color:#888888;
+    padding-top:5px;
+}
+#mem_form li.row {
+    height:30px;
+    margin-top:10px;
+    border-bottom:solid 1px #e5e5e5;
+}
+.item input {
+    width:80px;
+    height:16px;
+    border:solid 1px #cccccc;
+}
+.item select {
+    width:80px;
+    height:20px;
+    border:solid 1px #cccccc;
+    font-size:12px;
+}
+.col1 {
+    width:120px;
+    text-align:right;
+    display:inline-block;	
+}
+.col2 {
+    margin-left:10px;
+    display:inline-block;
+}
+.col2 li {
+    display:inline-block;
+    vertical-align:top;
+}
+#buttons {
+	margin:20px 0 0 300px;
+}
+</style>
+</head>
+<body>
+<div id="mem_title"><img src="img/join_title.gif"></div>
+<form>
+  <ul id="mem_form">
+    <li class="row">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_id.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input type="text"></li>
+            <li><img src="img/chk_id.gif"></li>
+            <li>영문, 숫자 조합으로 4~12자 이내</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="row">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_pw.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input type="password"></li>
+            <li>영문, 숫자 조합으로 4~12자 이내</li>
+          </ul>
+        </li>
+      </ul>
+    </li>			
+    <li  class="row" id="pw_confirm">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_pw2.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input type="password"></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li  class="row" id="name">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_name2.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input type="text"></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li  class="row" id="birthday">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_birthday.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input style="width:40px" type="text"></li>
+            <li>년&nbsp;</li>
+            <li><input style="width:20px" type="text"></li>
+            <li>월&nbsp;</li>
+            <li><input style="width:20px" type="text"></li>
+            <li>일&nbsp;</li>
+            <li><input style="width:10px" type="radio" name="year" checked></li>
+            <li>음력&nbsp;</li>
+            <li><input style="width:10px" type="radio" name="year"></li>
+            <li>양력</li>
+          </ul>
+        </li>
+      </ul>
+    </li>	
+    <li class="row" id="email">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_email.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input type="text"></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="row">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_hp.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input style="width:30px;" type="text"></li>
+            <li>-</li>
+            <li><input style="width:40px" type="text"></li>
+            <li>-</li>
+            <li><input style="width:40px" type="text"></li>		
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="row" id="job">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_job.gif"></li>
+        <li class="col2">
+          <ul>
+            <li>
+              <select>
+                <option>직업선택</option>
+                <option>직장인</option>
+                <option>사업가</option>
+                <option>학생</option>
+                <option>기타</option>
+              </select>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="row" id="target">
+      <ul class="item">
+        <li class="col1"><img src="img/txt_target.gif"></li>
+        <li class="col2">
+          <ul>
+            <li><input style="width:10px;" type="checkbox"></li>
+            <li>시험대비</li>
+            <li><input style="width:10px;" type="checkbox"></li>
+            <li>업무상</li>
+            <li><input style="width:10px;" type="checkbox"></li>
+            <li>취미</li>
+            <li><input style="width:10px;" type="checkbox"></li>
+            <li>기타</li>						
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul> <!-- mem_form -->
+
+  <div id="buttons">
+    <img src="img/btn_cancel.gif">&nbsp;<img src="img/btn_ok.gif">
+  </div>
+</form>
+</body>
+</html>

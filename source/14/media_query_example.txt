@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name= ________________  content="width=device-width, initial-scale=1.0"/>
+<title>연습문제(14장)</title>
+<style>
+body {
+    font-size:1.0em;
+    color:#444444;
+}
+@media only screen and ( ______________________ ) { /* 해상도가 500px 이하인 경우 */
+    body {
+        __________________:#ffff00; /* 배경 색상을 노란색으로 */
+        color:_________________ ; /* 글자는 파란색으로 */
+        ___________________:0.8em; /* 글자 크기는 150%로 */
+    }
+}
+</style>
+</head>
+<body>
+미디어 쿼리 연습입니다.^^
+</body>
+</html>

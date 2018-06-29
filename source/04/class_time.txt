@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>연습문제(4장)</title>
+<style>
+table, th, tr, td {
+    border:solid 1px black; 
+    border-collapse: collapse;
+    padding:8px;
+}
+</style>
+</head>
+<body>
+________________ 강의 시간표</h3>
+<table>
+  <tr>
+    <th>구분</th>	
+    <th>월</th>	
+    <th>화</th>
+    <th>수</th> 
+    <th>목</th>
+    <th>금</th>
+  </tr>
+  <tr>
+    <td><b>1교시</b></td>
+    <td  __________________ >웹 기획</td> 
+    <td  __________________ >웹 디자인</td> 
+    <td  __________________ >HTML</td> 
+    <td  __________________ >웹 디자인</td> 
+    <td>영어</td> 		
+  </tr>
+  _____________________
+    <td><b>2교시</b></td>
+    <td rowspan="4">야외수업</td> 		
+  _____________________
+  <tr>
+    <td><b>3교시</b></td>
+    <td>&nbsp;</td> 
+    <td>&nbsp;</td> 
+    <td>&nbsp;</td> 	
+    <td>&nbsp;</td> 		
+  </tr>
+  <tr>
+    <td>______________________ </td>
+    <td rowspan="2">UI 디자인</td> 
+    <td rowspan="2">자바스크립트</td> 
+    <td rowspan="2">모바일 디자인</td> 
+    <td rowspan="2">HTML</td> 	
+  </tr>
+  <tr>
+    <td><b>5교시</b></td>
+  </tr>	
+</table>
+</body>
+</html>

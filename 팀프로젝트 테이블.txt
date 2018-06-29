@@ -1,0 +1,16 @@
+MEMBER
+member_no(PK)	member_name	member_age
+
+MEMBER_ADDR
+member_addr_no(PK)	member_no(FK)	member_addr_content
+
+
+
+Member
+MemberDao
+
+MemberAddr
+MemberAddrDao - insertMember(Member member), updateMember(Member member), deleteMember(int memberNo)
+*.jsp
+
+memberInsertForm

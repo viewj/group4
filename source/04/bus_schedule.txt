@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>연습문제(4장)</title>
+<style>
+table, th, tr, td {
+	border:solid 1px black; 
+	border-collapse: collapse;
+	padding:8px;
+}
+</style>
+</head>
+<body>
+<h3>통학 버스 시간표</h3>
+__________________
+  <tr>
+    <th ________________ >전철역 => 캠퍼스</th>
+    <th ________________ >캠퍼스 => 전철역</th>
+  </tr>
+  <tr>
+    <th>출발</th>
+    <th>도착</th> 
+    <th>출발</th>
+    <th>도착</th>
+  </tr>
+  ___________________
+    <td>10:00</td>
+    <td>10:20</td> 
+    <td>12:00</td>
+    <td>12:20</td>
+  ___________________
+  <tr>
+    <td>13:00</td>
+    <td>13:20</td> 
+    <td>15:00</td>
+    <td>15:20</td>
+  </tr>
+</table>
+</body>
+</html>

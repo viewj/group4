@@ -1,0 +1,57 @@
+﻿<!-- 생략 -->
+<style>
+table {
+    ______________________:collapse;
+}
+table, td, th {
+    border:solid 1px #cccccc; }
+tr {
+    height:40px;
+    ____________________:center; }
+td, th {
+    padding:5px; }
+.slow {
+    background-color:#fbdbf2;
+    color:#0000ff;    
+    ______________________:underline;
+    font-weight:bold; }
+.fast {
+    background-color:#fbdbf2;
+    color:#ff0000;
+    text-decoration: ____________________;
+    font-weight:bold; }
+#table_title {
+    height:30px;
+    _____________________________:#eeeeee; }
+#col1 {
+    width:90px; }
+#col2, #col3 {
+    width:50px; }
+#col4, #col5 {
+    width:80px; }
+</style>
+</head>
+<body>
+<h2>버스표 예매</h2>
+<table>
+  <tr id="table_title">
+    <th>구분</th><th>출발</th><th>도착</th><th>출발시간</th><th>소요시간</th>      
+  </tr>
+  <tr>
+    <td id="col1" class="slow">완행</td>  
+    <td id="col2">서울</td><td id="col3">광주</td>
+    <td id="col4">09:00</td><td id="col5">03:00</td>
+  </tr>
+  <tr>
+    <td class="fast">직행</td>
+    <td>서울</td><td>대구</td>
+    <td>10:00</td><td>03:30</td>
+  </tr>
+  <tr>
+    <td class="fast">직행</td>  
+    <td>서울</td><td>부산</td>
+    <td>11:00</td><td>04:10</td>
+  </tr>
+</table>
+</body>
+</html>
