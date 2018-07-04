@@ -40,8 +40,7 @@
 					</tr>
 					<tr>
 						<td>판매하는 주소 :</td>
-						<td><input type="text" name="sellAddressText1"></td>
-						<td><input type="text" name="sellAddressText2"></td>
+						<td><input type="text" name="sellAddressText"></td>
 					</tr>
 					<tr>
 						<td>가게 or 메뉴 소개 :</td>
