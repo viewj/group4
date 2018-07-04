@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="connDB.DriverDB" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,7 +22,7 @@
 			// 비로그인 화면
 		%>
 		<h2>로그인 화면</h2>
-		<form action="<%= request.getContextPath() %>/mLogin/loginAction.jsp" method="post">
+		<form action="<%= request.getContextPath() %>/member/loginMember/loginAction.jsp" method="post">
 			<table border="1">
 				<thead>
 					<tr>
@@ -40,7 +39,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a href="<%= request.getContextPath() %>/member/memberInsert.jsp">회원가입</a> &nbsp;
+							<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">회원가입</a> &nbsp;
 							<a href="#">아이디/비밀번호 찾기</a>
 						</td>
 					</tr>
@@ -52,12 +51,13 @@
 			// 로그인 성공 시 화면
 		%>
 			<%= memberName%>님 <%= memberLevel%>로 로그인 
-		<a href="<%= request.getContextPath() %>/mLogin/logoutAction.jsp"> 로그아웃 </a><br><br>
+		<a href="<%= request.getContextPath() %>/member/loginMember/logoutAction.jsp"> 로그아웃 </a><br><br>
 		<%
 			if(memberLevel.equals("구매자")){
 		%>
-		<a href="<%= request.getContextPath() %>/mInsert/memberInsertForm.jsp">01회원가입</a>
-		<a href="#">02상품검색</a>
+		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
+		<a href="#">02회원정보수정</a>
+		<a href="#">03상품검색</a>
 		<h2>선택화면</h2>
 		<table border="1">
 			<thead>
@@ -74,9 +74,10 @@
 		<%
 			}else if(memberLevel.equals("판매자")){
 		%>
-		<a href="<%= request.getContextPath() %>/minsert/m_insert_form.jsp">01회원가입</a>
-		<a href="#">02상품등록</a>
-		<a href="#">03전체상품검색</a>
+		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
+		<a href="#">02회원정보수정</a>
+		<a href="#">03상품등록</a>
+		<a href="#">04전체상품검색</a>
 		<h2>선택화면</h2>
 		<table border="1">
 			<thead>
@@ -93,10 +94,11 @@
 		<%
 			}else if(memberLevel.equals("관리자")){
 		%>	
-		<a href="#">01회원가입</a>
+		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
 		<a href="#">02전체회원검색</a>
-		<a href="#">03상품등록</a>
-		<a href="#">04전체상품검색</a>
+		<a href="#">03회원정보수정</a>
+		<a href="#">04상품등록</a>
+		<a href="#">05전체상품검색</a>
 		<h2>선택화면</h2>
 		<table border="1">
 			<thead>
