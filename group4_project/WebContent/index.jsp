@@ -9,14 +9,21 @@
 	<body>
 		<%
 			request.setCharacterEncoding("euc-kr");
+			// 한글 사용가능하게 함
 			String memberId = (String)session.getAttribute("sendId");
 			String memberName = (String)session.getAttribute("sendName");
 			String memberLevel = (String)session.getAttribute("sendLevel");
+			String memberGender = (String)session.getAttribute("sendGender");
+			String memberAddr = (String)session.getAttribute("sendAddr");
+			String memberDate = (String)session.getAttribute("sendDate");
+			// 세션에서 받아온 아이디에 저장되어있는 정보들
 			
+		// 권한별로 구현되는 화면이 달라짐
 			if(memberLevel == null){ 
+			// 비로그인 화면
 		%>
 		<h2>로그인 화면</h2>
-		<form action="<%= request.getContextPath() %>/login/loginAction.jsp" method="post">
+		<form action="<%= request.getContextPath() %>/mLogin/loginAction.jsp" method="post">
 			<table border="1">
 				<thead>
 					<tr>
@@ -42,27 +49,67 @@
 		</form>
 		<%
 			} else {
+			// 로그인 성공 시 화면
 		%>
-			<%= memberName%>님 <%= memberLevel%>로 로그인중 
-		<a href="<%= request.getContextPath() %>/login/logout.jsp"> 로그아웃 </a><br><br>
+			<%= memberName%>님 <%= memberLevel%>로 로그인 
+		<a href="<%= request.getContextPath() %>/mLogin/logoutAction.jsp"> 로그아웃 </a><br><br>
 		<%
 			if(memberLevel.equals("구매자")){
 		%>
-		<a href="<%= request.getContextPath() %>/minsert/m_insert_form.jsp">01회원가입</a>
-		<a href="<%= request.getContextPath() %>/goods/goods_search_form.jsp?m_id=<%= memberId%>">04상품검색</a>
+		<a href="<%= request.getContextPath() %>/mInsert/memberInsertForm.jsp">01회원가입</a>
+		<a href="#">02상품검색</a>
+		<h2>선택화면</h2>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>나의 점심 리스트</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td> </td>
+				</tr>
+			</tbody>
+		</table>
 		<%
 			}else if(memberLevel.equals("판매자")){
 		%>
 		<a href="<%= request.getContextPath() %>/minsert/m_insert_form.jsp">01회원가입</a>
-		<a href="<%= request.getContextPath() %>/goods/goods_insert_form.jsp?m_id=<%= memberId%>">03상품등록</a>
-		<a href="<%= request.getContextPath() %>/goods/goods_search_form.jsp?m_id=<%= memberId%>">04상품검색</a>	
+		<a href="#">02상품등록</a>
+		<a href="#">03전체상품검색</a>
+		<h2>선택화면</h2>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>나의 점심 리스트</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td> </td>
+				</tr>
+			</tbody>
+		</table>
 		<%
 			}else if(memberLevel.equals("관리자")){
 		%>	
-		<a href="<%= request.getContextPath() %>/minsert/m_insert_form.jsp">01회원가입</a>
-		<a href="<%= request.getContextPath() %>/msearch/m_search_list.jsp">02전체회원검색</a>
-		<a href="<%= request.getContextPath() %>/goods/goods_insert_form.jsp?m_id=<%= memberId%>">03상품등록</a>
-		<a href="<%= request.getContextPath() %>/goods/goods_search_form.jsp?m_id=<%= memberId%>">04상품검색</a>	
+		<a href="#">01회원가입</a>
+		<a href="#">02전체회원검색</a>
+		<a href="#">03상품등록</a>
+		<a href="#">04전체상품검색</a>
+		<h2>선택화면</h2>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>나의 점심 리스트</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td> </td>
+				</tr>
+			</tbody>
+		</table>
 		<%
 			}
 		}

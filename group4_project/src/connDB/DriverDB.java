@@ -10,9 +10,9 @@ public class DriverDB {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/db23jgl?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "dbid23jgl";
-			String dbPass = "dbpw23jgl";
+			String jdbcDriver = "jdbc:mysql://localhost:3306/group4?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "group4id4";
+			String dbPass = "group4pw4";
 			
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 		} catch (ClassNotFoundException e) {
