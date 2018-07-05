@@ -143,7 +143,7 @@ public class MemberDao {
 	public void updateMember(Member member) {
 		DriverDB sqlCon = new DriverDB();
 		conn = sqlCon.driverDbcon();
-		String sql = "UPDATE member SET member_name=?, member_level=?, member_gender=?, member_address=?, member_date=now() WHERE member_id=? and member_pw=?";
+		String sql = "UPDATE member SET member_name=?, member_level=?, member_gender=?, member_address=? WHERE member_id=? and member_pw=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

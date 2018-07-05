@@ -42,7 +42,7 @@
 					<tr>
 						<td> 
 							<div>&nbsp;아이디 : <input type="text" name="sendId"></div>
-							<div>비밀번호 : <input type="text" name="sendPw"></div>
+							<div>비밀번호 : <input type="password" name="sendPw"></div>
 							<div><input type="submit" value="로그인"></div>
 						</td>
 					</tr>

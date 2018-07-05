@@ -16,8 +16,7 @@
 			String memberName = (String)session.getAttribute("sendName");
 			String memberLevel = (String)session.getAttribute("sendLevel");
 			String memberGender = (String)session.getAttribute("sendGender");
-			String memberAddress1 = (String)session.getAttribute("sendAddress1");
-			String memberAddress2 = (String)session.getAttribute("sendAddress2");
+			String memberAddress = (String)session.getAttribute("sendAddress");
 			String memberDate = (String)session.getAttribute("sendDate");
 			// 세션에서 받아온 아이디에 저장되어있는 정보들
 			
@@ -25,8 +24,7 @@
 			session.setAttribute("sendName", memberName);
 			session.setAttribute("sendLevel", memberLevel);
 			session.setAttribute("sendGender", memberGender);
-			session.setAttribute("sendAddress1", memberAddress1);
-			session.setAttribute("sendAddress2", memberAddress2);
+			session.setAttribute("sendAddress", memberAddress);
 			session.setAttribute("sendDate", memberDate);
 			
 			MemberDao list = new MemberDao();
@@ -36,25 +34,34 @@
 		<%= memberName%>님 <%= memberLevel%>로 로그인 
 		<a href="<%= request.getContextPath() %>/member/loginMember/logoutAction.jsp"> 로그아웃 </a><br><br>
 		<h2>전체회원검색</h2>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>회원리스트</th>
-				</tr>
-			</thead>
-			<tbody>	
-		<%
-			for(int i=0; i<totalList.size(); i++){
-				Member member = totalList.get(i);
-		%>		
-				<tr>
-					<td><%=member.getMemberId()%></td>
-					<td><%=member.getMemberName()%>
-				</tr>
-		<%
-			}
-		%>
-			</tbody>
-		</table>	
+		<form action="<%=request.getContextPath()%>/member/listMember/memberDetail.jsp" method="post">
+			<table border="1">
+				<thead>
+					<tr>
+						<th colspan="6">회원리스트</th>
+					</tr>
+					<tr>
+						<th>아이디</th> <th>이름</th> <th>권한</th> <th>성별</th> <th>주소</th> <th>가입날짜</th>
+					</tr>
+				</thead>
+				<tbody>	
+					<%
+						for(int i=0; i<totalList.size(); i++){
+							Member member = totalList.get(i);
+					%>		
+							<tr>
+								<td><a href="<%=request.getContextPath()%>/member/listMember/memberDetail.jsp?sendId=<%=member.getMemberId()%>"><%=member.getMemberId()%></a></td>
+								<td><a href="<%=request.getContextPath()%>/member/listMember/memberDetail.jsp?sendId=<%=member.getMemberId()%>"><%=member.getMemberName()%></a></td>
+								<td><a href="<%=request.getContextPath()%>/member/listMember/memberDetail.jsp?sendId=<%=member.getMemberId()%>"><%=member.getMemberLevel()%></a></td>
+								<td><a href="<%=request.getContextPath()%>/member/listMember/memberDetail.jsp?sendId=<%=member.getMemberId()%>"><%=member.getMemberGender()%></a></td>
+								<td><a href="<%=request.getContextPath()%>/member/listMember/memberDetail.jsp?sendId=<%=member.getMemberId()%>"><%=member.getMemberAddress()%></a></td>
+								<td><a href="<%=request.getContextPath()%>/member/listMember/memberDetail.jsp?sendId=<%=member.getMemberId()%>"><%=member.getMemberDate()%></a></td>
+							</tr>
+					<%
+						}
+					%>
+				</tbody>
+			</table>
+		</form>
 	</body>
 </html>
