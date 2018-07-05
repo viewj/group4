@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 public class SellerDao {
 	
+	//
+	public void deleteSellerSelect(String memberId ,String memberPass ,int sellCode) {
+		
+	}
+	
 	//클릭한 리스트 상제 정보를 불러오기 위한 메서드 입니다.
 	public Seller detailSellerSelect() {
 		
@@ -62,8 +67,41 @@ public class SellerDao {
 		return seller;
 	}
 	
+	//리스
+	public int pagePerRow(int rowPerPage) {
+		
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		int totalPage = 0;
+		int listPage = 0;
+		DriverDB driverDb = new DriverDB();
+		
+		try {
+			connection = driverDb.driverDbcon();
+			String totalPageQuery = "SELCET COUNT(sell_code) AS sellCode FROM seller";
+			preparedStatement = connection.prepareStatement(totalPageQuery);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				totalPage = resultSet.getInt("sellCode");
+			}
+			listPage = totalPage / rowPerPage;
+			
+			if(totalPage % rowPerPage != 0) {
+				listPage++;
+			}
+			
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}
+		
+		return listPage;
+	}
+	
 	//상품 메뉴리스트에 쓰이는 Select메서드입니다
-	public ArrayList<Seller> ListSellerSelect() {
+	public ArrayList<Seller> listSellerSelect(int begin ,int rowPerPage) {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
