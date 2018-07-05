@@ -6,6 +6,137 @@ import java.util.ArrayList;
 
 public class SellerDao {
 	
+	//goodsList.jsp파일에서 선택한 정보를 index.jsp파일로 보내기 위한 메서드입니다.
+	public ArrayList<Seller> SearchSellerList(int sellCode) { 
+		
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		
+		ArrayList<Seller> checkList = null;
+		Seller seller = null;
+		
+		DriverDB driverDb = new DriverDB();
+		
+		try {
+			connection = driverDb.driverDbcon();
+			
+			String SelectQuery = "SELECT * FROM seller WHERE sell_code=?";
+			preparedStatement = connection.prepareStatement(SelectQuery);
+			preparedStatement.setInt(1, sellCode);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			checkList = new ArrayList<Seller>();
+			if(resultSet.next()) {
+				seller = new Seller();
+				seller.setSellCode(resultSet.getInt("sell_code"));
+				seller.setSellName(resultSet.getString("sell_name"));
+				seller.setSellAddress(resultSet.getString("sell_address"));
+				seller.setSellCategory(resultSet.getString("sell_category"));
+				seller.setSellMenu(resultSet.getString("sell_menu"));
+				seller.setSellDate(resultSet.getString("sell_date"));
+				seller.setSellContent(resultSet.getString("sell_content"));
+				checkList.add(seller);
+			}
+			
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(resultSet != null) 
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					
+				}
+			
+			if(preparedStatement != null) 
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					
+				}
+		}
+		
+		return checkList;
+	}
+	
+	//검색 기능관련된 메서드입니다
+	public ArrayList<Seller> SelectSearchList(String title ,String sellSearch) {
+		
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Seller seller = null;
+		ArrayList<Seller> totalSearch = null;
+		DriverDB driverDb = new DriverDB();
+		
+		try {
+			connection = driverDb.driverDbcon();
+			
+			if(title.equals("음식이름")) {
+				String SelectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_menu=?";
+				preparedStatement = connection.prepareStatement(SelectQuery);
+				preparedStatement.setString(1, sellSearch);
+			}else if(title.equals("가게이름")) {
+				String SelectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_name=?";
+				preparedStatement = connection.prepareStatement(SelectQuery);
+				preparedStatement.setString(1, sellSearch);
+			}else if(title.equals("주소")) {
+				String SelectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_address=?";
+				preparedStatement = connection.prepareStatement(SelectQuery);
+				preparedStatement.setString(1, sellSearch);
+			}else {
+				
+			}
+			resultSet = preparedStatement.executeQuery();
+			
+			totalSearch = new ArrayList<Seller>();
+			if(resultSet.next()) {
+				seller = new Seller();
+				seller.setSellName(resultSet.getString("sell_name"));
+				seller.setSellMenu(resultSet.getString("sell_menu"));
+				seller.setSellPrice(resultSet.getString("sell_price"));
+				seller.setSellAddress(resultSet.getString("sell_address"));
+				totalSearch.add(seller);
+			}
+			
+			
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(resultSet != null) 
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					
+				}
+			
+			if(preparedStatement != null) 
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					
+				}
+		}
+		
+		return totalSearch;
+	}
+	
 	//삭제 처리하기 위한 메서드입니다
 	public String deleteSellerSelect(String memberId ,String memberPass ,int sellCode) {
 		
@@ -197,8 +328,10 @@ public class SellerDao {
 		connection = driverDb.driverDbcon();
 		//driverDb변수에 들어있는 주소값으로 찾아가 driverDbcon()메서드를 실행을 해 드아비르 로딩 or 드라이브 연결을 시켜줬습니다
 		try {
-			String selectQuery = "SELECT sell_code ,sell_name ,sell_address ,sell_price ,sell_menu FROM seller ORDER BY sell_code DESC";
+			String selectQuery = "SELECT sell_code ,sell_name ,sell_address ,sell_price ,sell_menu FROM seller ORDER BY sell_code DESC LIMIT ? ,?";
 			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setInt(1, begin);
+			preparedStatement.setInt(2, rowPerPage);
 			
 			resultSet = preparedStatement.executeQuery();
 			

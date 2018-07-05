@@ -25,13 +25,33 @@
 			ArrayList<Seller> getTotalList = sellerDao.listSellerSelect(begin ,rowPerPage);
 		%>
 		<h2>음식 메뉴</h2>
+			<form action="<%=request.getContextPath()%>/goods/searchGoods/goodsSearchList.jsp" method="post">
+			<table>
+				<tr>
+					<td>검색하기 :</td>
+					<td><select name="title">
+						<option>===선택===</option>
+						<option>음식이름</option>
+						<option>가게이름</option>
+						<option>주소</option>
+						
+					</select></td>
+					<td><input type="text" name="sellSearch"></td>
+					<td><input type="submit" value="검색"></td>
+				</tr>
+				</table>
+			</form>	
 		<input type="button" onclick="location.href='<%=request.getContextPath()%>/goods/insertGoods/goodsInsertForm.jsp?sendId=<%=memberId%>'" value="상품 등록하기">
+		<!-- 상품 등록하는곳으로 가는 버튼입니다 -->
+		<input type="button" onclick="loaction.href='<%=request.getContextPath()%>/goods/index.jsp'" value="메인홈페이지로">
+		<!-- 메인홈페이지로 가는 버튼입니다. -->
 		<table border="1">
 			<tr>
 				<td>가게이름</td>
 				<td>음식 메뉴 </td>
 				<td>메뉴 가격 </td>
 				<td>가게 주소 </td>
+				<td>선택</td>
 			</tr>
 		<%
 			for(int i=0; i<getTotalList.size(); i++) {
@@ -45,6 +65,7 @@
 				<td><%=seller.getSellMenu()%></td>
 				<td><%=seller.getSellPrice()%></td>
 				<td><%=seller.getSellAddress()%></td>
+				<td><a href="../../index.jsp?sendCode=<%=seller.getSellCode()%>">선택</a></td>
 			</tr>
 	
 		<%
