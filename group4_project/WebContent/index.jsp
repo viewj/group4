@@ -13,9 +13,18 @@
 			String memberName = (String)session.getAttribute("sendName");
 			String memberLevel = (String)session.getAttribute("sendLevel");
 			String memberGender = (String)session.getAttribute("sendGender");
-			String memberAddr = (String)session.getAttribute("sendAddr");
+			String memberAddress1 = (String)session.getAttribute("sendAddress1");
+			String memberAddress2 = (String)session.getAttribute("sendAddress2");
 			String memberDate = (String)session.getAttribute("sendDate");
 			// 세션에서 받아온 아이디에 저장되어있는 정보들
+			
+			session.setAttribute("sendId", memberId);
+			session.setAttribute("sendName", memberName);
+			session.setAttribute("sendLevel", memberLevel);
+			session.setAttribute("sendGender", memberGender);
+			session.setAttribute("sendAddress1", memberAddress1);
+			session.setAttribute("sendAddress2", memberAddress2);
+			session.setAttribute("sendDate", memberDate);
 			
 		// 권한별로 구현되는 화면이 달라짐
 			if(memberLevel == null){ 
@@ -95,8 +104,8 @@
 			}else if(memberLevel.equals("관리자")){
 		%>	
 		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
-		<a href="#">02전체회원검색</a>
-		<a href="#">03회원정보수정</a>
+		<a href="<%= request.getContextPath() %>/member/mList/memberList">02전체회원검색</a>
+		<a href="<%= request.getContextPath() %>/member/updateMember/memberUpdateForm.jsp">03회원정보수정</a>
 		<a href="#">04상품등록</a>
 		<a href="#">05전체상품검색</a>
 		<h2>선택화면</h2>

@@ -41,7 +41,8 @@
 					session.setAttribute("sendLevel", dbLevel);
 					session.setAttribute("sendName", dbName);
 					session.setAttribute("sendGender", dbGender);
-					session.setAttribute("sendName", dbName);
+					session.setAttribute("sendAddress", dbAddress);
+					session.setAttribute("sendDate", dbAddress);
 					/* System.out.println("로그인 성공"); */					
 		%>	
 				<script type="text/javascript">

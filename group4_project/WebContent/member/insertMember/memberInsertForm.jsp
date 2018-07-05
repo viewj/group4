@@ -12,15 +12,15 @@
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" name="memberId" size="20"></td>
-			<tr>
+			</tr>
 			<tr>
 				<td>암호</td>
 				<td><input type="text" name="memberPw" size="20"></td>
-			<tr>
+			</tr>
 			<tr>
 				<td>이름</td>
 				<td><input type="text" name="memberName" size="20"></td>
-			<tr>
+			</tr>
 			<tr>
 				<td>권한</td>
 				<td>
@@ -30,8 +30,7 @@
 					    <option value="구매자" selected="selected">구매자</option>
 					</select>
 				</td>
-			<tr>
-			
+			</tr>
 			<tr>
 				<td>성별</td>
 				<td>
@@ -40,14 +39,13 @@
 					    <option value="여자" >여자</option>
 					</select>
 				</td>
+			</tr>
 			<tr>
-			<tr>
-				<td rowspan="2">주소</td>
-				<td rowspan="2">
-					<span><input type="text" name="memberAddress1" size="20"></span><br>
-					<span><input type="text" name="memberAddress2" size="20"></span>
+				<td> 주소</td>
+				<td>
+					<input type="text" name="memberAddress" size="20">
 				</td>
-			<tr>
+			</tr>
 			<tr>
 				<td colspan="4"><input type="submit" value="회원가입버튼"></td>
 			</tr>

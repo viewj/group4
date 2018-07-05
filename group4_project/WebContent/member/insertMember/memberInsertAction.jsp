@@ -16,8 +16,9 @@
 			String memberName = request.getParameter("memberName");
 			String memberLevel = request.getParameter("memberLevel");
 			String memberGender = request.getParameter("memberGender");
-			String memberAddress = request.getParameter("memberAddress1") + " " + request.getParameter("memberAddress2");
+			String memberAddress = request.getParameter("memberAddress");
 			
+								
 			Member member = new Member();
 			member.setMemberId(memberId);
 			member.setMemberPw(memberPw);

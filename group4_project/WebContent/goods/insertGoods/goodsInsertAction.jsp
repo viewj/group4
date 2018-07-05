@@ -28,7 +28,7 @@
 			Seller seller = new Seller();
 			SellerDao sellerDao = new SellerDao();
 			
-			seller.setSellId(memberId);
+			seller.setMemberId(memberId);
 			seller.setSellName(sellName);
 			seller.setSellCategory(sellCategory);
 			seller.setSellMenu(sellMenu);
