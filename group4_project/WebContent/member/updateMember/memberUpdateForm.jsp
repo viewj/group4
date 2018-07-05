@@ -81,20 +81,38 @@
 					}
 				%>
 			</tr>
+			<%
+				if ((member.getMemberGender().equals("남자")	)) {
+			%>
+				<tr>
+					<td>성별</td>
+					<td>
+						<select name="memberGender">
+						    <option value="남자" selected="selected">남자</option>
+						    <option value="여자" >여자</option>
+						</select>
+					</td>
+				</tr>
+			<%
+				} else {
+			%>
+					<tr>
+						<td>성별</td>
+						<td>
+							<select name="memberGender">
+							    <option value="남자">남자</option>
+							    <option value="여자" selected="selected">여자</option>
+							</select>
+						</td>
+					</tr>
+			<%
+				}
+			%>
 			
-			<tr>
-				<td>성별</td>
-				<td>
-					<select name="memberGender">
-					    <option value="남자" selected="selected">남자</option>
-					    <option value="여자" >여자</option>
-					</select>
-				</td>
-			</tr>
 			<tr>
 				<td>주소</td>
 				<td>
-					<input type="text" name="memberAddress1" size="20" value="<%=memberAddress%>">
+					<input type="text" name="memberAddress" size="20" value="<%=memberAddress%>">
 				</td>
 			</tr>
 			<tr>

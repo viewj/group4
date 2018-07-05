@@ -139,4 +139,28 @@ public class MemberDao {
 		
 		return member;
 	}
+	
+	public void updateMember(Member member) {
+		DriverDB sqlCon = new DriverDB();
+		conn = sqlCon.driverDbcon();
+		String sql = "UPDATE member SET member_name=?, member_level=?, member_gender=?, member_address=?, member_date=now() WHERE member_id=? and member_pw=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setString(2, member.getMemberLevel());
+			pstmt.setString(3, member.getMemberGender());
+			pstmt.setString(4, member.getMemberAddress());
+			pstmt.setString(5, member.getMemberId());
+			pstmt.setString(6, member.getMemberPw());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("쿼리문을 실행할 수 없습니다. <--updateMember()");
+		}finally{
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+	}
 }

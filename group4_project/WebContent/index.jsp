@@ -65,8 +65,8 @@
 			if(memberLevel.equals("구매자")){
 		%>
 		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
-		<a href="#">02회원정보수정</a>
-		<a href="#">03상품검색</a>
+		<a href="<%= request.getContextPath() %>/member/updateMember/memberUpdateForm.jsp">02회원정보수정</a>
+		<a href="<%= request.getContextPath() %>/goods/listGoods/goodsList.jsp">03전체상품검색</a>
 		<h2>선택화면</h2>
 		<table border="1">
 			<thead>
@@ -84,9 +84,9 @@
 			}else if(memberLevel.equals("판매자")){
 		%>
 		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
-		<a href="#">02회원정보수정</a>
+		<a href="<%= request.getContextPath() %>/member/updateMember/memberUpdateForm.jsp">02회원정보수정</a>
 		<a href="#">03상품등록</a>
-		<a href="#">04전체상품검색</a>
+		<a href="<%= request.getContextPath() %>/goods/listGoods/goodsList.jsp">04전체상품검색</a>
 		<h2>선택화면</h2>
 		<table border="1">
 			<thead>
@@ -104,10 +104,10 @@
 			}else if(memberLevel.equals("관리자")){
 		%>	
 		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
-		<a href="<%= request.getContextPath() %>/member/mList/memberList">02전체회원검색</a>
+		<a href="<%= request.getContextPath() %>/member/searchMember/memberSearchList.jsp">02전체회원검색</a>
 		<a href="<%= request.getContextPath() %>/member/updateMember/memberUpdateForm.jsp">03회원정보수정</a>
-		<a href="#">04상품등록</a>
-		<a href="#">05전체상품검색</a>
+		<a href="<%= request.getContextPath() %>/goods/insertGoods/goodsInsertForm.jsp">04상품등록</a>
+		<a href="<%= request.getContextPath() %>/goods/listGoods/goodsList.jsp">05전체상품검색</a>
 		<h2>선택화면</h2>
 		<table border="1">
 			<thead>

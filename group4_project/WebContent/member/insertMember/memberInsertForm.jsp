@@ -15,7 +15,7 @@
 			</tr>
 			<tr>
 				<td>암호</td>
-				<td><input type="text" name="memberPw" size="20"></td>
+				<td><input type="password" name="memberPw" size="20"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
