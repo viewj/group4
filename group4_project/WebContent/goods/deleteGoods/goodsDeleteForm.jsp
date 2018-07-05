@@ -10,24 +10,21 @@
 		<%
 			int sellCode = Integer.parseInt(request.getParameter("sendCode"));
 			String memberId = (String)session.getAttribute("sendId");
-			String memberLevel = (String)session.getAttribute("sendLevel");
-			if(memberLevel.equals("판매자")) {
 		%>
 		<h2>게시물 삭제 하기</h2>
-		<form action="./goodseDeleteAction.jsp" method="post">
+		<form action="./goodsDeleteAction.jsp" method="post">
 			<table>
 				<tr>
 					<td>패스워드를 입력하세요 :</td>
-					<td><input type="password" name="member bbnPassword"></td>
+					<td><input type="password" name="memberPassword"></td>
 				</tr>
 				<tr>
+					<td><input type="button" name="forback" value="되돌아가기" onclick="location.href='<%=request.getContextPath()%>/goods/listGoods/goodsDetail.jsp'"></td>
 					<td><input type="submit" value="삭제하기"></td>
-					<td><input type="hidden" name="sendCode" value="sellCode"></td>
+					<td><input type="hidden" name="sendCode" value="<%=sellCode%>"></td>
+					<td><input type="hidden" name="sendId" value="<%=memberId%>"></td>
 				</tr>
 			</table>	
 		</form>
-		<%
-			}
-		%>
 	</body>
 </html>

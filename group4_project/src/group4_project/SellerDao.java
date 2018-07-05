@@ -6,9 +6,72 @@ import java.util.ArrayList;
 
 public class SellerDao {
 	
-	//
-	public void deleteSellerSelect(String memberId ,String memberPass ,int sellCode) {
+	//삭제 처리하기 위한 메서드입니다
+	public String deleteSellerSelect(String memberId ,String memberPass ,int sellCode) {
 		
+		PreparedStatement preparedStatementSelect = null;
+		PreparedStatement preparedStatementDelete = null;
+		Connection connection = null;
+		ResultSet resultSetSelect = null;
+		String deleteCheck = null;
+		DriverDB driverDb = new DriverDB();
+		
+		try {
+			connection = driverDb.driverDbcon();
+			
+			String SelectQuery = "SELECT member_pw FROM member WHERE member_id=?";
+			preparedStatementSelect = connection.prepareStatement(SelectQuery);
+			preparedStatementSelect.setString(1, memberId);
+			
+			resultSetSelect = preparedStatementSelect.executeQuery();
+			
+			if(resultSetSelect.next()) {
+				System.out.println("아이디 일치");
+				if(memberPass.equals(resultSetSelect.getString("member_pw"))) {
+					System.out.println("삭제 실행");
+					String deleteQuery = "DELETE FROM seller WHERE sell_code=?";
+					preparedStatementDelete = connection.prepareStatement(deleteQuery);
+					preparedStatementDelete.setInt(1, sellCode);
+					
+					preparedStatementDelete.executeUpdate();
+					
+					deleteCheck = "삭제 실행";
+				}else {
+					System.out.println("패스워드 실패");
+					
+					deleteCheck = "패스워드 실패";
+				}
+			}
+			
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(resultSetSelect != null)
+				try {
+					resultSetSelect.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatementSelect != null)
+				try {
+					preparedStatementSelect.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatementDelete != null)
+				try {
+					preparedStatementDelete.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+		}
+		return deleteCheck;
 	}
 	
 	//클릭한 리스트 상제 정보를 불러오기 위한 메서드 입니다.
@@ -79,7 +142,7 @@ public class SellerDao {
 		
 		try {
 			connection = driverDb.driverDbcon();
-			String totalPageQuery = "SELCET COUNT(sell_code) AS sellCode FROM seller";
+			String totalPageQuery = "SELECT COUNT(sell_code) AS sellCode FROM seller";
 			preparedStatement = connection.prepareStatement(totalPageQuery);
 			
 			resultSet = preparedStatement.executeQuery();
@@ -95,6 +158,26 @@ public class SellerDao {
 			
 		}catch(SQLException close) {
 			close.printStackTrace();
+		}finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try{
+				preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+	
 		}
 		
 		return listPage;
@@ -254,7 +337,7 @@ public class SellerDao {
 		try {
 			String insertQuery = "INSERT INTO seller(member_id ,sell_name ,sell_address ,sell_category ,sell_menu ,sell_price ,sell_date ,sell_content) VALUES(? ,? ,? ,? ,? ,? ,now() ,?)";
 			preparedStatement = connection.prepareStatement(insertQuery);
-			preparedStatement.setString(1, null);
+			preparedStatement.setString(1, seller.getMemberId());
 			preparedStatement.setString(2, seller.getSellName());
 			preparedStatement.setString(3, seller.getSellAddress());
 			preparedStatement.setString(4, seller.getSellCategory());

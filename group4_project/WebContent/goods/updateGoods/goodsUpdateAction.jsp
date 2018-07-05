@@ -33,6 +33,7 @@
 			seller.setSellName(sellName);
 			seller.setSellMenu(sellMenu);
 			seller.setSellCategory(sellCategory);
+			seller.setSellPrice(sellPrice);
 			seller.setSellAddress(sellAddress);
 			seller.setSellContent(sellContent);
 			

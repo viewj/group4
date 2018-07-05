@@ -9,9 +9,12 @@
 	</head>
 	<body>
 		<%
+			String memberId = (String)session.getAttribute("sendId");
+		
 			SellerDao sellerDao = new SellerDao();
 			Seller seller = sellerDao.detailSellerSelect();
-			
+			String getMemberId = seller.getMemberId();
+			System.out.println(getMemberId +"<- getMemberId");
 		%>
 		<h2>상세 정보</h2>
 		<table>
@@ -47,11 +50,16 @@
 				<td>등록된 날짜  :</td>
 				<td><%=seller.getSellDate()%></td>
 			</tr>
-			<tr>
-				<td><a href="<%=request.getContextPath()%>/uodateGoods/goodsUpdateForm.jsp?sendCode=<%=seller.getSellCode()%>">수정</a></td>
-				<td><a href="<%=request.getContextPath()%>/*?sendCode=<%=seller.getSellCode()%>">삭제</a></td>
-			</tr>
-			
+		<%
+			if(memberId.equals(getMemberId)) {
+		%>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/goods/updateGoods/goodsUpdateForm.jsp?sendCode=<%=seller.getSellCode()%>">수정</a></td>
+					<td><a href="<%=request.getContextPath()%>/goods/deleteGoods/goodsDeleteForm.jsp?sendCode=<%=seller.getSellCode()%>">삭제</a></td>
+				</tr>
+		<%
+			}
+		%>
 		</table>
 	</body>
 </html>

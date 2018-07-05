@@ -7,9 +7,7 @@
 	</head>
 	<body>
 		<%
-			session.getAttribute("memberName");
-			session.getAttribute("memberPw");
-			session.getAttribute("memberLevel");
+			String memberId = (String)session.getAttribute("sendId");
 		%>
 		<h2>상품 등록</h2>
 			<form action="./goodsInsertAction.jsp" method="post">
@@ -45,6 +43,7 @@
 					<tr>
 						<td>가게 or 메뉴 소개 :</td>
 						<td><input type="text" name="sellContent"><td>
+						<td><input type="hidden" name="memberId" value="<%=memberId%>"></td>
 					</tr>
 					<tr>
 						<td><input type="submit" value="등록 하기"></td>

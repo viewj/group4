@@ -58,7 +58,7 @@
 		<%
 			}
 			//currentPage값이 1보다 크면 이전 a link태그가 나오는 if문 입니다.
-	
+			
 			if(currentPage<listPage) {
 		%>
 				<a href="./goodsList.jsp?currentPage=<%=currentPage+1%>">다음 ▶</a>

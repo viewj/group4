@@ -11,7 +11,7 @@
 		<%
 			request.setCharacterEncoding("euc-kr");
 		
-			String memberId = (String)session.getAttribute("sendId");
+			String memberId = request.getParameter("memberId");
 			String sellCategory = request.getParameter("sellCategory");
 			String sellName = request.getParameter("sellName");
 			String sellMenu = request.getParameter("sellMenu");
@@ -37,6 +37,8 @@
 			seller.setSellContent(sellContent);
 			
 			sellerDao.insertSeller(seller);
+			
+			response.sendRedirect(request.getContextPath()+"/goods/listGoods/goodsList.jsp");
 		%>
 	</body>
 </html>

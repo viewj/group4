@@ -27,7 +27,7 @@
 								<option>한식</option>
 								<option>일식</option>
 								<option>중식</option>
-								<option>양식</option>
+								<option selected="selected">양식</option>
 							</select>
 						</td>
 					</tr>
