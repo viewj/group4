@@ -56,6 +56,7 @@
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/goods/updateGoods/goodsUpdateForm.jsp?sendCode=<%=seller.getSellCode()%>">수정</a></td>
 					<td><a href="<%=request.getContextPath()%>/goods/deleteGoods/goodsDeleteForm.jsp?sendCode=<%=seller.getSellCode()%>">삭제</a></td>
+					<td><a href="<%=request.getContextPath()%>/goods/listGoods/goodsList.jsp">목록으로</a></td>
 				</tr>
 		<%
 			}

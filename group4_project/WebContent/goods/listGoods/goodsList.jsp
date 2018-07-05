@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<%
-		
+			String memberId =(String)session.getAttribute("sendId");
 			int currentPage = 1;
 			//현재 페이지를 설정했습니다.
 			if( request.getParameter("currentPage") != null) {
@@ -25,6 +25,7 @@
 			ArrayList<Seller> getTotalList = sellerDao.listSellerSelect(begin ,rowPerPage);
 		%>
 		<h2>음식 메뉴</h2>
+		<input type="button" onclick="location.href='<%=request.getContextPath()%>/goods/insertGoods/goodsInsertForm.jsp?sendId=<%=memberId%>'" value="상품 등록하기">
 		<table border="1">
 			<tr>
 				<td>가게이름</td>

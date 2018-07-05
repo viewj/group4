@@ -78,20 +78,24 @@ INSERT INTO `reple` (`reple_no`, `reple_content`, `member_id`) VALUES
 
 
 -- 테이블 group4의 구조를 덤프합니다. seller
-CREATE TABLE IF NOT EXISTS `seller` (
-  `sell_code` int(10) NOT NULL,
-  `member_id` varchar(50) DEFAULT NULL,
-  `sell_name` varchar(50) DEFAULT NULL,
-  `sell_address` varchar(50) DEFAULT NULL,
-  `sell_category` varchar(50) DEFAULT NULL,
-  `sell_menu` varchar(50) DEFAULT NULL,
-  `sell_price` varchar(50) DEFAULT NULL,
-  `sell_date` varchar(50) DEFAULT NULL,
-  `sell_content` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`sell_code`),
-  KEY `FK_seller_member` (`member_id`),
-  CONSTRAINT `FK_seller_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=euckr;
+CREATE TABLE `seller` (
+	`sell_code` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_id` VARCHAR(50) NULL DEFAULT NULL,
+	`sell_name` VARCHAR(50) NULL DEFAULT NULL,
+	`sell_address` VARCHAR(50) NULL DEFAULT NULL,
+	`sell_category` VARCHAR(50) NULL DEFAULT NULL,
+	`sell_menu` VARCHAR(50) NULL DEFAULT NULL,
+	`sell_price` VARCHAR(50) NULL DEFAULT NULL,
+	`sell_date` VARCHAR(50) NULL DEFAULT NULL,
+	`sell_content` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`sell_code`),
+	INDEX `FK_seller_member` (`member_id`),
+	CONSTRAINT `FK_seller_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+;
+
 
 -- Dumping data for table group4.seller: ~1 rows (대략적)
 /*!40000 ALTER TABLE `seller` DISABLE KEYS */;

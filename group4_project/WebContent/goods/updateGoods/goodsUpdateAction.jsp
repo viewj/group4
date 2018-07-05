@@ -39,6 +39,9 @@
 			
 			SellerDao sellerDao = new SellerDao();
 			sellerDao.updateSeller(seller);
+			
+			response.sendRedirect(request.getContextPath()+"/goods/listGoods/goodsDetail.jsp");
 		%>
+		<!--  -->
 	</body>
 </html>

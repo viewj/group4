@@ -85,7 +85,7 @@
 		%>
 		<a href="<%= request.getContextPath() %>/member/insertMember/memberInsertForm.jsp">01회원가입</a>
 		<a href="<%= request.getContextPath() %>/member/updateMember/memberUpdateForm.jsp">02회원정보수정</a>
-		<a href="#">03상품등록</a>
+		<a href="<%= request.getContextPath() %>/goods/insertGoods/goodsInsertForm.jsp">03상품등록</a>
 		<a href="<%= request.getContextPath() %>/goods/listGoods/goodsList.jsp">04전체상품검색</a>
 		<h2>선택화면</h2>
 		<table border="1">
