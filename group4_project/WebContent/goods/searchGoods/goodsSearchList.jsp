@@ -83,13 +83,17 @@
 		%>
 			</table>
 		<%
-				int listPage = sellerDao.SearchpagePerRow(rowPerPage);
 				if(currentPage>1) {
 		%>
 					<a href="./goodsSearchList.jsp.jsp?currentPage=<%=currentPage-1%>">◀ 이전</a>
 		<%
 				}
 				//currentPage값이 1보다 크면 이전 a link태그가 나오는 if문 입니다.
+				int listPage = searchList.size() / rowPerPage;
+			
+				if(searchList.size() % rowPerPage != 0) {
+					listPage++;
+				}
 				
 				if(currentPage<listPage) {
 		%>

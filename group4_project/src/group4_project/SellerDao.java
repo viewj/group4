@@ -6,59 +6,6 @@ import java.util.ArrayList;
 
 public class SellerDao {
 	
-	//searchList 총페이지 갯수 구하는 메서드입니다.
-	public int SearchpagePerRow(int rowPerPage) {
-		
-		PreparedStatement preparedStatement = null;
-		Connection connection = null;
-		ResultSet resultSet = null;
-		int totalPage = 0;
-		int listPage = 0;
-		DriverDB driverDb = new DriverDB();
-		
-		try {
-			connection = driverDb.driverDbcon();
-			String totalPageQuery = "SELECT COUNT(sell_code) AS sellCode FROM seller";
-			preparedStatement = connection.prepareStatement(totalPageQuery);
-			
-			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
-				totalPage = resultSet.getInt("sellCode");
-			}
-			listPage = totalPage / rowPerPage;
-			
-			if(totalPage % rowPerPage != 0) {
-				listPage++;
-			}
-			
-		}catch(SQLException close) {
-			close.printStackTrace();
-		}finally {
-			if(resultSet != null)
-				try {
-					resultSet.close();
-				}catch(SQLException close) {
-					close.printStackTrace();
-				}
-			if(preparedStatement != null)
-				try{
-				preparedStatement.close();
-				}catch(SQLException close) {
-					close.printStackTrace();
-				}
-			if(connection != null)
-				try {
-					connection.close();
-				}catch(SQLException close) {
-					close.printStackTrace();
-				}
-	
-		}
-		
-		return listPage;
-	}
-	
 	
 	//검색 기능관련된 메서드입니다
 	public ArrayList<Seller> SelectSearchList(String title ,String sellSearch ,int begin ,int rowPerPage) {
@@ -90,10 +37,11 @@ public class SellerDao {
 				preparedStatement.setString(1, "%"+sellSearch+"%");
 				preparedStatement.setInt(2, begin);
 				preparedStatement.setInt(3, rowPerPage);
-			resultSet = preparedStatement.executeQuery();
+				
+				resultSet = preparedStatement.executeQuery();
 			
 			totalSearch = new ArrayList<Seller>();
-			if(resultSet.next()) {
+			while(resultSet.next()) {
 				seller = new Seller();
 				seller.setSellName(resultSet.getString("sell_name"));
 				seller.setSellMenu(resultSet.getString("sell_menu"));
