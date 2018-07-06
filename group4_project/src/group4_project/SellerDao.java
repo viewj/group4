@@ -6,70 +6,62 @@ import java.util.ArrayList;
 
 public class SellerDao {
 	
-	//goodsList.jsp파일에서 선택한 정보를 index.jsp파일로 보내기 위한 메서드입니다.
-	public ArrayList<Seller> SearchSellerList(int sellCode) { 
+	//searchList 총페이지 갯수 구하는 메서드입니다.
+	public int SearchpagePerRow(int rowPerPage) {
 		
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		ResultSet resultSet = null;
-		
-		ArrayList<Seller> checkList = null;
-		Seller seller = null;
-		
+		int totalPage = 0;
+		int listPage = 0;
 		DriverDB driverDb = new DriverDB();
 		
 		try {
 			connection = driverDb.driverDbcon();
-			
-			String SelectQuery = "SELECT * FROM seller WHERE sell_code=?";
-			preparedStatement = connection.prepareStatement(SelectQuery);
-			preparedStatement.setInt(1, sellCode);
+			String totalPageQuery = "SELECT COUNT(sell_code) AS sellCode FROM seller";
+			preparedStatement = connection.prepareStatement(totalPageQuery);
 			
 			resultSet = preparedStatement.executeQuery();
 			
-			checkList = new ArrayList<Seller>();
 			if(resultSet.next()) {
-				seller = new Seller();
-				seller.setSellCode(resultSet.getInt("sell_code"));
-				seller.setSellName(resultSet.getString("sell_name"));
-				seller.setSellAddress(resultSet.getString("sell_address"));
-				seller.setSellCategory(resultSet.getString("sell_category"));
-				seller.setSellMenu(resultSet.getString("sell_menu"));
-				seller.setSellDate(resultSet.getString("sell_date"));
-				seller.setSellContent(resultSet.getString("sell_content"));
-				checkList.add(seller);
+				totalPage = resultSet.getInt("sellCode");
+			}
+			listPage = totalPage / rowPerPage;
+			
+			if(totalPage % rowPerPage != 0) {
+				listPage++;
 			}
 			
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {
-			if(resultSet != null) 
+			if(resultSet != null)
 				try {
 					resultSet.close();
 				}catch(SQLException close) {
-					
+					close.printStackTrace();
 				}
-			
-			if(preparedStatement != null) 
-				try {
-					preparedStatement.close();
+			if(preparedStatement != null)
+				try{
+				preparedStatement.close();
 				}catch(SQLException close) {
 					close.printStackTrace();
 				}
-			
 			if(connection != null)
 				try {
 					connection.close();
 				}catch(SQLException close) {
-					
+					close.printStackTrace();
 				}
+	
 		}
 		
-		return checkList;
+		return listPage;
 	}
 	
+	
 	//검색 기능관련된 메서드입니다
-	public ArrayList<Seller> SelectSearchList(String title ,String sellSearch) {
+	public ArrayList<Seller> SelectSearchList(String title ,String sellSearch ,int begin ,int rowPerPage) {
 		
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -77,25 +69,27 @@ public class SellerDao {
 		Seller seller = null;
 		ArrayList<Seller> totalSearch = null;
 		DriverDB driverDb = new DriverDB();
-		
+		String selectQuery = null;
 		try {
 			connection = driverDb.driverDbcon();
 			
 			if(title.equals("음식이름")) {
-				String SelectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_menu=?";
-				preparedStatement = connection.prepareStatement(SelectQuery);
-				preparedStatement.setString(1, sellSearch);
+				 selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_menu LIKE ? LIMIT ? ,?";
+				
+				
 			}else if(title.equals("가게이름")) {
-				String SelectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_name=?";
-				preparedStatement = connection.prepareStatement(SelectQuery);
-				preparedStatement.setString(1, sellSearch);
+				 selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_name LIKE ? LIMIT ? ,?";
+				
+				
 			}else if(title.equals("주소")) {
-				String SelectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_address=?";
-				preparedStatement = connection.prepareStatement(SelectQuery);
-				preparedStatement.setString(1, sellSearch);
-			}else {
+				 selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_address LIKE ? LIMIT ? ,?";
 				
 			}
+			
+				preparedStatement = connection.prepareStatement(selectQuery);
+				preparedStatement.setString(1, "%"+sellSearch+"%");
+				preparedStatement.setInt(2, begin);
+				preparedStatement.setInt(3, rowPerPage);
 			resultSet = preparedStatement.executeQuery();
 			
 			totalSearch = new ArrayList<Seller>();
@@ -150,7 +144,7 @@ public class SellerDao {
 		try {
 			connection = driverDb.driverDbcon();
 			
-			String SelectQuery = "SELECT member_pw FROM member WHERE member_id=?";
+			String SelectQuery = "SELECT member_pw FROM member WHERE member_id=? ";
 			preparedStatementSelect = connection.prepareStatement(SelectQuery);
 			preparedStatementSelect.setString(1, memberId);
 			
@@ -261,7 +255,7 @@ public class SellerDao {
 		return seller;
 	}
 	
-	//리스
+	//list총페이지 갯수 구하는 메서드입니다
 	public int pagePerRow(int rowPerPage) {
 		
 		PreparedStatement preparedStatement = null;

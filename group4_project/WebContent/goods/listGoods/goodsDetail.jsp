@@ -62,5 +62,9 @@
 			}
 		%>
 		</table>
+		<h3>´ñ±Û</h3>
+		<div>
+			<input type="text">
+		</div>
 	</body>
 </html>

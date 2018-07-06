@@ -29,13 +29,6 @@
 			session.setAttribute("sendAddress2", memberAddress2);
 			session.setAttribute("sendDate", memberDate);
 			
-			int sellCode = Integer.parseInt(request.getParameter("sendCode"));
-			//선택한 메뉴 code값 입니다.
-			SellerDao sellerDao = new SellerDao();
-			//SellerDao클래스에 들어있는 메서드 실행을 위해 생성했습니다.
-			ArrayList<Seller> checkList = sellerDao.SearchSellerList(sellCode);
-			//sellerDao참조 변수에 들어있는 주소값을 찾아가 메서드를 실행 후 주소값을 Seller클래스 타입의 checheckList변수에 할당했습니다.
-			
 			// 권한별로 구현되는 화면이 달라짐
 			if(memberLevel == null){ 
 			// 비로그인 화면
@@ -105,39 +98,7 @@
 							<th>나의 점심 리스트</th>
 						</tr>
 					</thead>
-		<%
-					for(int i=0; i<checkList.size(); i++) {
-						Seller seller = checkList.get(i);
-		%>
 						
-						<tbody>
-							<tr>
-								<td>가게 이름 : </td>
-								<td><%=seller.getSellName()%></td>
-							</tr>
-							<tr>
-								<td>가게 주소 : </td>
-								<td><%=seller.getSellAddress()%></td>
-							</tr>
-							<tr>
-								<td>카테고리 : </td>
-								<td><%=seller.getSellCategory()%></td>
-							</tr>
-							<tr>
-								<td>선택한 메뉴 : </td>
-								<td><%=seller.getSellMenu()%></td>
-							</tr>
-							<tr>
-								<td>판매 금액 : </td>
-								<td><%=seller.getSellPrice()%></td>
-							</tr>
-							<tr>
-								<td>내용 : </td>
-								<td><%=seller.getSellContent()%></td>
-							</tr>
-		<%
-					}
-		%>
 					</tbody>
 				</table>
 		<%
