@@ -8,12 +8,16 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<%-- <%
+	 <%
+	 		request.setCharacterEncoding("euc-kr");
 			int sellCode = Integer.parseInt(request.getParameter("sendCheckList"));
 			String memberId = (String)session.getAttribute("sendId");
-		
+			System.out.println(sellCode +"<-sellCode");
+			System.out.println(memberId +"<- memberId");
 			ChoiceDao choicedao = new ChoiceDao();
 			choicedao.insertChoice(memberId, sellCode);
-		%> --%>
+			
+			response.sendRedirect("request.getContextPath()/.goodsList.jsp");
+	%>
 	</body>
 </html>

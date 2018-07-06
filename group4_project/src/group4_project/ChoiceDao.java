@@ -25,7 +25,7 @@ public class ChoiceDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
-			pstmt.setInt(1, sellCode);
+			pstmt.setInt(2, sellCode);
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
