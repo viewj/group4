@@ -6,6 +6,71 @@ import java.util.ArrayList;
 
 public class SellerDao {
 	
+	public int pageTotalSelect(String getTitle ,String getSellSearch ,int rowPerPage) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int totalList = 0 ;
+		int listSearch = 0;
+		String countSelectQuery = null;
+		
+		DriverDB driverDb = new DriverDB();
+		
+		try {
+			connection = driverDb.driverDbcon();
+			
+			if(getTitle.equals("가게이름")) {
+				countSelectQuery = "SELECT COUNT(sell_code) AS sellCode FROM seller WHERE sell_name LIKE ?";
+				
+			}else if(getTitle.equals("음식이름")) {
+				countSelectQuery = "SELECT COUNT(sell_code) AS sellCode FROM seller WHERE sell_menu LIKE ?";
+				
+			}else if(getTitle.equals("주소")) {
+				countSelectQuery = "SELECT COUNT(sell_code) AS sellCode FROM seller WHERE sell_address LIKE ?";
+				
+			}
+			preparedStatement = connection.prepareStatement(countSelectQuery);
+			preparedStatement.setString(1, "'%"+getSellSearch+"%'");
+			
+			resultSet = preparedStatement.executeQuery();
+			System.out.println(resultSet +"<-resultSet");
+			
+			if(resultSet.next()) {
+				totalList = resultSet.getInt("sellCode");
+			}
+			listSearch = totalList / rowPerPage ;
+			
+			if(totalList % rowPerPage != 0) {
+				listSearch++;
+			}
+			
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(resultSet != null) 
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					
+				}
+			
+			if(preparedStatement != null) 
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					
+				}
+		}
+		return listSearch;
+	}
 	
 	//검색 기능관련된 메서드입니다
 	public ArrayList<Seller> SelectSearchList(String title ,String sellSearch ,int begin ,int rowPerPage) {
@@ -13,32 +78,43 @@ public class SellerDao {
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		ResultSet resultSet = null;
-		Seller seller = null;
+
 		ArrayList<Seller> totalSearch = null;
 		DriverDB driverDb = new DriverDB();
+		
+		Seller seller = null;
 		String selectQuery = null;
+		
 		try {
 			connection = driverDb.driverDbcon();
 			
-			if(title.equals("음식이름")) {
-				 selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_menu LIKE ? LIMIT ? ,?";
+			if(sellSearch == "") {
+				selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller ORDER BY sell_code DESC LIMIT ? ,?";
 				
-				
-			}else if(title.equals("가게이름")) {
-				 selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_name LIKE ? LIMIT ? ,?";
-				
-				
-			}else if(title.equals("주소")) {
-				 selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_address LIKE ? LIMIT ? ,?";
-				
-			}
-			
 				preparedStatement = connection.prepareStatement(selectQuery);
+				preparedStatement.setInt(1, begin);
+				preparedStatement.setInt(2, rowPerPage);
+			}else {
+				if(title.equals("음식이름")) {
+					selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_menu LIKE ? ORDER BY sell_code DESC LIMIT ? ,?";
+					preparedStatement = connection.prepareStatement(selectQuery);
+					
+				}else if(title.equals("가게이름")) {
+					selectQuery = "SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_name LIKE ? ORDER BY sell_code DESC LIMIT ? ,?";
+					preparedStatement = connection.prepareStatement(selectQuery);
+					
+				}else if(title.equals("주소")) {
+					selectQuery = " SELECT sell_name ,sell_menu ,sell_price ,sell_address FROM seller WHERE sell_address LIKE ? ORDER BY sell_code DESC LIMIT ? ,?";
+					preparedStatement = connection.prepareStatement(selectQuery);
+					
+				}
 				preparedStatement.setString(1, "%"+sellSearch+"%");
 				preparedStatement.setInt(2, begin);
 				preparedStatement.setInt(3, rowPerPage);
 				
-				resultSet = preparedStatement.executeQuery();
+			}
+			
+			resultSet = preparedStatement.executeQuery();
 			
 			totalSearch = new ArrayList<Seller>();
 			while(resultSet.next()) {
@@ -49,7 +125,6 @@ public class SellerDao {
 				seller.setSellAddress(resultSet.getString("sell_address"));
 				totalSearch.add(seller);
 			}
-			
 			
 		}catch(SQLException close) {
 			close.printStackTrace();

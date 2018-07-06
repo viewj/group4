@@ -27,7 +27,10 @@
 		
 			String getTitle = request.getParameter("title");
 			String getSellSearch = request.getParameter("sellSearch");
-			System.out.println(currentPage + rowPerPage + getTitle + getSellSearch + "<---goodSearchList페이지");
+			
+			System.out.println(getTitle +"<- getTitle");
+			System.out.println(getSellSearch +"<- getSellSearch");
+			
 			SellerDao sellerDao = new SellerDao();
 			ArrayList<Seller> searchList = sellerDao.SelectSearchList(getTitle ,getSellSearch ,begin ,rowPerPage);
 		%>
@@ -83,13 +86,16 @@
 		%>
 			</table>
 		<%
+				int totalList = sellerDao.pageTotalSelect(getTitle ,getSellSearch ,rowPerPage);
+			
+				
 				if(currentPage>1) {
 		%>
-					<a href="./goodsSearchList.jsp.jsp?currentPage=<%=currentPage-1%>">◀ 이전</a>
+					<a href="./goodsSearchList.jsp?currentPage=<%=currentPage-1%>">◀ 이전</a>
 		<%
 				}
 				//currentPage값이 1보다 크면 이전 a link태그가 나오는 if문 입니다.
-				int listPage = searchList.size() / rowPerPage;
+				int listPage = searchList.size()+1 / rowPerPage;
 			
 				if(searchList.size() % rowPerPage != 0) {
 					listPage++;
@@ -97,7 +103,7 @@
 				
 				if(currentPage<listPage) {
 		%>
-					<a href="./goodsSearchList.jsp.jsp?currentPage=<%=currentPage+1%>">다음 ▶</a>
+					<a href="./goodsSearchList.jsp?currentPage=<%=currentPage+1%>">다음 ▶</a>
 		<%
 				}
 				//currentPage값이 listPage값보다 적으면 다음 페이지 a link태그가 나오는 if문 입니다.
