@@ -92,15 +92,40 @@
 				}
 		%>
 				<h2>선택화면</h2>
-				<table border="1">
-					<thead>
-						<tr>
-							<th>나의 점심 리스트</th>
-						</tr>
-					</thead>
-						
-					</tbody>
-				</table>
+				<form action="#" method="post">
+					<table border="1">
+						<thead>
+							<tr>
+								<th colspan="2">나의 점심 리스트</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>가게 이름 : </td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>가게 주소 : </td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>카테고리 : </td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>선택한 메뉴 : </td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>판매 금액 : </td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>내용 : </td>
+								<td></td>
+						</tbody>
+					</table>
+				</form>
 		<%
 			}
 		%>
