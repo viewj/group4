@@ -12,6 +12,7 @@
 	<body>
 		<%
 			String memberId =(String)session.getAttribute("sendId");
+			session.setAttribute("sendId", memberId);
 			int currentPage = 1;
 			//현재 페이지를 설정했습니다.
 			if( request.getParameter("currentPage") != null) {
@@ -68,7 +69,7 @@
 							<td><%=seller.getSellMenu()%></td>
 							<td><%=seller.getSellPrice()%></td>
 							<td><%=seller.getSellAddress()%></td>
-							<td><input type="checkbox" name="checkList" value="<%=seller.getSellMenu()%>"></td>
+							<td><a href="./choiceInsertAction.jsp?sendCheckList=<%=seller.getSellCode()%>">선택</a></td>
 						</tr>
 	
 		<%
